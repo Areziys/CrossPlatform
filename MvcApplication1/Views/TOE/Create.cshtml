@@ -1,0 +1,60 @@
+﻿@model MvcApplication1.Models.TypesOfEquipment
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TypesOfEquipment</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Type)
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Flops)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Flops)
+            @Html.ValidationMessageFor(model => model.Flops)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Core)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Core)
+            @Html.ValidationMessageFor(model => model.Core)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Bufer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Bufer)
+            @Html.ValidationMessageFor(model => model.Bufer)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+}

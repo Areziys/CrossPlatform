@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DatabaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TerialNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypesOfEquipment">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Flops" Type="real" Nullable="false" />
+          <Property Name="Core" Type="int" Nullable="false" />
+          <Property Name="Bufer" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Equipment__Type__1273C1CD">
+          <End Role="TypesOfEquipment" Type="Self.TypesOfEquipment" Multiplicity="1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesOfEquipment">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DatabaseModelContainer">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypesOfEquipment" EntityType="Self.TypesOfEquipment" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Equipment__Type__1273C1CD" Association="Self.FK__Equipment__Type__1273C1CD">
+            <End Role="TypesOfEquipment" EntitySet="TypesOfEquipment" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TypesOfEquipment" Relationship="Self.FK__Equipment__Type__1273C1CD" FromRole="Equipment" ToRole="TypesOfEquipment" />
+        </EntityType>
+        <EntityType Name="TypesOfEquipment">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Flops" Type="Single" Nullable="false" />
+          <Property Name="Core" Type="Int32" Nullable="false" />
+          <Property Name="Bufer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipments" Relationship="Self.FK__Equipment__Type__1273C1CD" FromRole="TypesOfEquipment" ToRole="Equipment" />
+        </EntityType>
+        <Association Name="FK__Equipment__Type__1273C1CD">
+          <End Role="TypesOfEquipment" Type="Self.TypesOfEquipment" Multiplicity="1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypesOfEquipment">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipments" EntityType="Self.Equipment" />
+          <EntitySet Name="TypesOfEquipments" EntityType="Self.TypesOfEquipment" />
+          <AssociationSet Name="FK__Equipment__Type__1273C1CD" Association="Self.FK__Equipment__Type__1273C1CD">
+            <End Role="TypesOfEquipment" EntitySet="TypesOfEquipments" />
+            <End Role="Equipment" EntitySet="Equipments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DatabaseModelContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Equipments">
+            <EntityTypeMapping TypeName="DatabaseModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TerialNumber" ColumnName="TerialNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypesOfEquipments">
+            <EntityTypeMapping TypeName="DatabaseModel.TypesOfEquipment">
+              <MappingFragment StoreEntitySet="TypesOfEquipment">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Flops" ColumnName="Flops" />
+                <ScalarProperty Name="Core" ColumnName="Core" />
+                <ScalarProperty Name="Bufer" ColumnName="Bufer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

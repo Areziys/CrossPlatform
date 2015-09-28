@@ -1,0 +1,43 @@
+﻿@model MvcApplication1.Models.TypesOfEquipment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>TypesOfEquipment</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Type)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Type)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Flops)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Flops)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Core)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Core)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Bufer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Bufer)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

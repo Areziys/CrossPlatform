@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TypesOfEquipment" Relationship="Self.FK__Equipment__Type__1273C1CD" FromRole="Equipment" ToRole="TypesOfEquipment" />
+  </EntityType>
+  <EntityType Name="TypesOfEquipment">
+    <Key>
+      <PropertyRef Name="Type" />
+    </Key>
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Flops" Type="Single" Nullable="false" />
+    <Property Name="Core" Type="Int32" Nullable="false" />
+    <Property Name="Bufer" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Equipments" Relationship="Self.FK__Equipment__Type__1273C1CD" FromRole="TypesOfEquipment" ToRole="Equipment" />
+  </EntityType>
+  <Association Name="FK__Equipment__Type__1273C1CD">
+    <End Role="TypesOfEquipment" Type="Self.TypesOfEquipment" Multiplicity="1" />
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypesOfEquipment">
+        <PropertyRef Name="Type" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Equipments" EntityType="Self.Equipment" />
+    <EntitySet Name="TypesOfEquipments" EntityType="Self.TypesOfEquipment" />
+    <AssociationSet Name="FK__Equipment__Type__1273C1CD" Association="Self.FK__Equipment__Type__1273C1CD">
+      <End Role="TypesOfEquipment" EntitySet="TypesOfEquipments" />
+      <End Role="Equipment" EntitySet="Equipments" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
